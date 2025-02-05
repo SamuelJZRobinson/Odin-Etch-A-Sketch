@@ -1,9 +1,9 @@
+/* Global */
 :root{
   --primary-colour: #24a0ed;
   --page-bacground: #f0ebd7;
 }
 
-/* Global */
 html, body{
 box-sizing: border-box;
 margin: 0;
@@ -30,8 +30,8 @@ background-color: var(--page-bacground);
   padding: 0px 0px 8px 0px;
 }
 
-/* Options */
-.option-category{
+/* Settongs */
+.settings-category{
   display: flex;
   justify-content: left;
   gap:8px;

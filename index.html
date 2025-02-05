@@ -1,7 +1,9 @@
-<!-- Tutorials Used -->
-<!-- Marvin Botchway.(7 December 2023).Etch a sketch JavaScript (Part 1).YouTube.https://www.youtube.com/watch?v=JlypmDz6aAU -->
-<!-- Marvin Botchway.(16 October 2023).Etch a sketch JavaScript (Part 2).YouTube.https://www.youtube.com/watch?v=9IZNrsJk29M -->
-<!-- Marvin Botchway.(16 October 2023).Etch a sketch JavaScript (Part 4).YouTube.https://www.youtube.com/watch?v=18gRh7-qg3w -->
+<!--
+  Tutorials Used:
+  Marvin Botchway.(7 December 2023).Etch a sketch JavaScript (Part 1).YouTube.https://www.youtube.com/watch?v=JlypmDz6aAU
+  Marvin Botchway.(16 October 2023).Etch a sketch JavaScript (Part 2).YouTube.https://www.youtube.com/watch?v=9IZNrsJk29M
+  Marvin Botchway.(16 October 2023).Etch a sketch JavaScript (Part 4).YouTube.https://www.youtube.com/watch?v=18gRh7-qg3w
+-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +17,17 @@
 <body>
   <div id="main-container">
     <div class="flex-container">
-      <div class="option-category">
+      <!-- Clear -->
+      <div class="settings-category">
         <button type="tool" id="but-clear" class="but but-normal" onclick="clearGrid();createGrid()"><span class="material-symbols-outlined">delete</span>Clear</button>
       </div>
-      <div class="option-category">
+      <!-- Tools -->
+      <div class="settings-category">
         <button type="tool" id="but-draw" class="but but-normal" onclick="setTool('draw')"><span class="material-symbols-outlined">edit</span>Draw</button>
         <button type="tool" id="but-erase" class="but but-normal" onclick="setTool('erase')"><span class="material-symbols-outlined">ink_eraser</span>Erase</button>
       </div>
-      <div class="option-category">
+      <!-- Colours -->
+      <div class="settings-category">
         <button type="colour" id="but-black" class="but but-circle" onclick="setColour('black')"></button>
         <button type="colour" id="but-gray" class="but but-circle" onclick="setColour('gray')"></button>
         <button type="colour" id="but-white" class="but but-circle" onclick="setColour('white')"></button>
@@ -33,13 +38,13 @@
         <button type="colour" id="but-blue" class="but but-circle" onclick="setColour('blue')"></button>
       </div>
     </div>
-    <div class="container">
-      <div class="option-category">
-        <input type="range" min="8" max="100" value="16" id="grid-size-slider" class="slider">
-        <p id="grid-size-value"></p>
-      </div>
+    <!-- Grid Size -->
+    <div class="settings-category">
+      <input type="range" min="8" max="100" value="16" id="grid-size-slider" class="slider">
+      <p id="grid-size-value"></p>
     </div>
     
+    <!-- Canvas -->
     <div id="canvas"></div>
   </div>
 
