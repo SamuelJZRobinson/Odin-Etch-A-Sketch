@@ -5,8 +5,7 @@ let GRID_SIZE = 16;
 
 // Set Canvas
 const CANVAS = document.querySelector("#canvas");
-CANVAS.style.width = `${CANVAS_SIZE}px`;
-CANVAS.style.height = `${CANVAS_SIZE}px`;
+CANVAS.style.width = CANVAS.style.height = `${CANVAS_SIZE}px`;
 
 // Set Grid Cells
 function changeBgColour(){
@@ -14,11 +13,13 @@ function changeBgColour(){
 }
 
 function createGridCells(){
-  for(let i = 0; i < (GRID_SIZE * GRID_SIZE); i++){
+  const TOTAL_CELLS = GRID_SIZE * GRID_SIZE;
+  const CELL_SIZE = `${(CANVAS_SIZE/GRID_SIZE) - (CELL_BORDER_SIZE*2)}px`;
+
+  for(let i = 0; i < (TOTAL_CELLS); i++){
     const GRID_CELL = document.createElement("div");
 
-    GRID_CELL.style.width = `${(CANVAS_SIZE/GRID_SIZE) - (CELL_BORDER_SIZE*2)}px`;
-    GRID_CELL.style.height = `${(CANVAS_SIZE/GRID_SIZE) - (CELL_BORDER_SIZE*2)}px`;
+    GRID_CELL.style.width = GRID_CELL.style.height = CELL_SIZE;
     GRID_CELL.classList.add("cell");
 
     CANVAS.appendChild(GRID_CELL);
