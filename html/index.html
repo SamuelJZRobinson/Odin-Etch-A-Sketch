@@ -15,11 +15,21 @@
   <div id="main-container">
     <div class="flex-container">
       <div class="option-category">
-        <button type="clear" id="but-clear" onclick="clearGrid();createGrid()"><span class="material-symbols-outlined">delete</span>Clear</button>
+        <button type="tool" id="but-clear" class="but" onclick="clearGrid();createGrid()"><span class="material-symbols-outlined">delete</span>Clear</button>
       </div>
       <div class="option-category">
-        <button type="draw" id="but-draw" onclick="setTool('draw')"><span class="material-symbols-outlined">edit</span>Draw</button>
-        <button type="erase" id="but-erase" onclick="setTool('erase')"><span class="material-symbols-outlined">ink_eraser</span>Erase</button>
+        <button type="tool" id="but-draw" class="but" onclick="setTool('draw')"><span class="material-symbols-outlined">edit</span>Draw</button>
+        <button type="tool" id="but-erase" class="but" onclick="setTool('erase')"><span class="material-symbols-outlined">ink_eraser</span>Erase</button>
+      </div>
+      <div class="option-category">
+        <button type="colour" id="but-black" class="but-circle" onclick="setColour('black')"></button>
+        <button type="colour" id="but-gray" class="but-circle" onclick="setColour('gray')"></button>
+        <button type="colour" id="but-white" class="but-circle" onclick="setColour('white')"></button>
+        <button type="colour" id="but-red" class="but-circle" onclick="setColour('red')"></button>
+        <button type="colour" id="but-orange" class="but-circle" onclick="setColour('orange')"></button>
+        <button type="colour" id="but-yellow" class="but-circle" onclick="setColour('yellow')"></button>
+        <button type="colour" id="but-green" class="but-circle" onclick="setColour('green')"></button>
+        <button type="colour" id="but-blue" class="but-circle" onclick="setColour('blue')"></button>
       </div>
     </div>
     <div class="container">

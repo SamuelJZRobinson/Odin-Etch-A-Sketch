@@ -42,10 +42,10 @@ function clearGrid(){
 }
 
 function setBgColour(e){
-  // Set Colour
-  if (selectedTool == "draw"){
-    selectedColour = "black";
-  }
+  // // Set Colour
+  // if (selectedTool == "draw"){
+  //   selectedColour = "black";
+  // }
 
   if (selectedTool == "erase"){
     selectedColour = "white";
@@ -94,4 +94,8 @@ SLIDER.oninput = function(){
   gridSize = this.value
   clearGrid();
   createGrid();
+}
+
+function setColour(colourName){
+  selectedColour = colourName;
 }
