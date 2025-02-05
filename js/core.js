@@ -7,7 +7,7 @@ let gridSize = 16;
 const CELL_BORDER_SIZE = 1;
 let isDrawing = false;
 let selectedTool = null;
-let selectedColour = "black";
+let selectedColour = null;
 
 const CANVAS = document.querySelector("#canvas");
 MAIN_CONTAINER.style.width = CANVAS.style.width = CANVAS.style.height = `${CANVAS_SIZE}px`;
@@ -42,23 +42,17 @@ function clearGrid(){
 }
 
 function setBgColour(e){
-  // // Set Colour
-  // if (selectedTool == "draw"){
-  //   selectedColour = "black";
-  // }
-
-  if (selectedTool == "erase"){
-    selectedColour = "white";
-  }
+  // Use seperate colour variable to preserve selected colour
+  let colorToApply = (selectedTool === "draw") ? selectedColour : "white";
 
   // Mouse Event
   if (e.type === "mousedown"){
     isDrawing = true;
-    e.target.style.backgroundColor = selectedColour;
+    e.target.style.backgroundColor = colorToApply;
   }
 
   if (e.type === "mouseover" && isDrawing){
-    e.target.style.backgroundColor = selectedColour;
+    e.target.style.backgroundColor = colorToApply;
   }
 }
 
@@ -99,3 +93,4 @@ SLIDER.oninput = function(){
 function setColour(colourName){
   selectedColour = colourName;
 }
+setColour("black");

@@ -1,5 +1,5 @@
 :root{
-  --primary-colour: #3a4dff;
+  --primary-colour: #24a0ed;
 }
 
 /* Global */
@@ -38,24 +38,27 @@ background-color: rgb(240, 235, 215);
 }
 
 .but{
+  cursor: pointer;
+  transition: all;
+}
+
+.but-normal{
   display: flex;
   align-items: center;
   padding: 3px 6px 3px 3px;
   border: 2px var(--primary-colour) solid;
   border-radius: 8px;
-  cursor: pointer;
-  transition: all;
 }
 
-.but.active{
-  background-color: red;
-}
-
-.but:hover{
+.but-normal.active{
   background-color: var(--primary-colour);
 }
 
-.but .material-symbols-outlined{
+.but-normal:hover{
+  background-color: var(--primary-colour);
+}
+
+.but-normal .material-symbols-outlined{
   padding-right: 8px;
   opacity: 80%;
 }
