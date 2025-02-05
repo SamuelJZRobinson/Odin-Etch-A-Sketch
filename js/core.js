@@ -82,10 +82,11 @@ const SLIDER_CONTAINER = document.querySelector("#slider-container");
 const SLIDER = document.querySelector("#grid-size-slider");
 const SLIDER_VALUE = document.querySelector("#grid-size-value");
 SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
+SLIDER.addEventListener("change", (e) => setGridSize());
 
-SLIDER.oninput = function(){
-  SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${this.value} x ${this.value}`;
-  gridSize = this.value
+function setGridSize(){
+  SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
+  gridSize = SLIDER.value
   clearGrid();
   createGrid();
 }
