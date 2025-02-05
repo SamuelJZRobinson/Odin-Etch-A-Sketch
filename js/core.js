@@ -2,36 +2,46 @@
 const CANVAS_SIZE = 600;
 const CELL_BORDER_SIZE = 1;
 let gridSize = 16;
+let isDrawing = false;
 
 const MAIN_CONTAINER = document.querySelector("#main-container");
 
 const CANVAS = document.querySelector("#canvas");
 MAIN_CONTAINER.style.width = CANVAS.style.width = CANVAS.style.height = `${CANVAS_SIZE}px`;
 
-function changeBgColour(){
-  this.style.backgroundColor = "black";
+function setBgColour(e){
+  if (e.type === "mousedown"){
+    isDrawing = true;
+    e.target.style.backgroundColor = "black";
+  }
+
+  if (e.type === "mouseover" && isDrawing){
+    e.target.style.backgroundColor = "black";
+  }
 }
 
-function createGridCells(){
+function createGrid(){
   const TOTAL_CELLS = gridSize * gridSize;
-  const CELL_SIZE = `${(CANVAS_SIZE/gridSize) - (CELL_BORDER_SIZE*2)}px`;
+  const CELL_SIZE = (CANVAS_SIZE/gridSize) - (CELL_BORDER_SIZE*2);
 
   for(let i = 0; i < (TOTAL_CELLS); i++){
     const GRID_CELL = document.createElement("div");
 
-    GRID_CELL.style.width = GRID_CELL.style.height = CELL_SIZE;
+    GRID_CELL.style.width = GRID_CELL.style.height = `${CELL_SIZE}px`;
     GRID_CELL.classList.add("cell");
-
     CANVAS.appendChild(GRID_CELL);
 
-    GRID_CELL.addEventListener("mouseover", changeBgColour);
+    GRID_CELL.addEventListener("mousedown", (e)=> setBgColour(e));
+    GRID_CELL.addEventListener("mouseover", (e)=> setBgColour(e));
+    GRID_CELL.addEventListener("mouseup", (e)=> isDrawing = false);
+    GRID_CELL.addEventListener("dragstart", (e) => (e.preventDefault()));
   }
 
   console.log("Created grid");
 }
-createGridCells();
+createGrid();
 
-function clearGridCells(){
+function clearGrid(){
   while (CANVAS.firstChild) {
     CANVAS.removeChild(CANVAS.firstChild);
   }
@@ -41,6 +51,8 @@ function clearGridCells(){
 
 // Set Options
 const BUT_CLEAR = document.querySelector("#But-Clear");
+const BUT_DRAW = document.querySelector("#But-Draw");
+const BUT_ERASE = document.querySelector("#But-Erase");
 
 const SLIDER_CONTAINER = document.querySelector("#slider-container");
 const SLIDER = document.querySelector("#grid-size-slider");
@@ -50,6 +62,6 @@ SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
 SLIDER.oninput = function(){
   SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${this.value} x ${this.value}`;
   gridSize = this.value
-  clearGridCells();
-  createGridCells();
+  clearGrid();
+  createGrid();
 }
