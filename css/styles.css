@@ -1,3 +1,7 @@
+:root{
+  --primary-colour: #3a4dff;
+}
+
 /* Global */
 html, body{
 box-sizing: border-box;
@@ -16,6 +20,53 @@ background-color: rgb(240, 235, 215);
   margin: 100px auto;
 }
 
+.flex-container{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0px 0px 8px 0px;
+}
+
+/* Options */
+.option-category{
+  display: flex;
+  justify-content: left;
+  gap:8px;
+  padding-right: 32px;
+}
+
+button{
+  display: flex;
+  align-items: center;
+  padding: 3px 6px 3px 3px;
+  border: 2px var(--primary-colour) solid;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all;
+}
+
+button:hover{
+  background-color: var(--primary-colour);
+}
+
+button .material-symbols-outlined{
+  padding-right: 8px;
+  opacity: 80%;
+}
+
+/* Slider */
+.slider{
+  width: 100%;
+  margin: 0 auto;
+}
+
+#grid-size-value{
+  width: 100%;
+  padding-left: 16px;
+}
+
 /* Canvas */
 #canvas{
   width: 100%;
@@ -26,20 +77,4 @@ background-color: rgb(240, 235, 215);
 .cell{
   background-color: rgb(250,250,250);
   border: 1px rgba(0,0,0,10%) solid;
-}
-
-/* Slider */
-#slider-container{
-  width: 50%;
-  margin: 0 auto;
-  padding: 16px 0px;
-}
-
-.slider{
-  width: 100%;
-}
-
-#grid-size-value{
-  width: 100%;
-  text-align: center;
 }

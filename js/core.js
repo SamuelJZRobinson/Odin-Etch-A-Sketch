@@ -1,5 +1,5 @@
 // Set Canvas
-const CANVAS_SIZE = 500;
+const CANVAS_SIZE = 600;
 const CELL_BORDER_SIZE = 1;
 let gridSize = 16;
 
@@ -34,6 +34,10 @@ function clearGridCells(){
     CANVAS.removeChild(CANVAS.firstChild);
   }
 }
+
+// Set Options
+const BUT_CLEAR = document.querySelector("#But-Clear");
+
 
 // Set Slider
 const SLIDER_CONTAINER = document.querySelector("#slider-container");
