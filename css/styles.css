@@ -47,6 +47,10 @@ button{
   transition: all;
 }
 
+button.active{
+  background-color: red;
+}
+
 button:hover{
   background-color: var(--primary-colour);
 }

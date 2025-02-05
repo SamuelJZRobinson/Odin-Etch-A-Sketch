@@ -1,24 +1,16 @@
+// Set Main Container
+const MAIN_CONTAINER = document.querySelector("#main-container");
+
 // Set Canvas
 const CANVAS_SIZE = 600;
-const CELL_BORDER_SIZE = 1;
 let gridSize = 16;
+const CELL_BORDER_SIZE = 1;
 let isDrawing = false;
-
-const MAIN_CONTAINER = document.querySelector("#main-container");
+let selectedTool = null;
+let selectedColour = "black";
 
 const CANVAS = document.querySelector("#canvas");
 MAIN_CONTAINER.style.width = CANVAS.style.width = CANVAS.style.height = `${CANVAS_SIZE}px`;
-
-function setBgColour(e){
-  if (e.type === "mousedown"){
-    isDrawing = true;
-    e.target.style.backgroundColor = "black";
-  }
-
-  if (e.type === "mouseover" && isDrawing){
-    e.target.style.backgroundColor = "black";
-  }
-}
 
 function createGrid(){
   const TOTAL_CELLS = gridSize * gridSize;
@@ -49,10 +41,48 @@ function clearGrid(){
   console.log("Cleared grid");
 }
 
+function setBgColour(e){
+  // Set Colour
+  if (selectedTool == "draw"){
+    selectedColour = "black";
+  }
+
+  if (selectedTool == "erase"){
+    selectedColour = "white";
+  }
+
+  // Mouse Event
+  if (e.type === "mousedown"){
+    isDrawing = true;
+    e.target.style.backgroundColor = selectedColour;
+  }
+
+  if (e.type === "mouseover" && isDrawing){
+    e.target.style.backgroundColor = selectedColour;
+  }
+}
+
 // Set Options
-const BUT_CLEAR = document.querySelector("#But-Clear");
-const BUT_DRAW = document.querySelector("#But-Draw");
-const BUT_ERASE = document.querySelector("#But-Erase");
+const BUT_DRAW = document.querySelector("#but-draw");
+const BUT_ERASE = document.querySelector("#but-erase");
+
+function setDefaultToolBgColour(){
+  BUT_DRAW.classList.remove("active");
+  BUT_ERASE.classList.remove("active");
+}
+
+function setTool(toolName){
+  selectedTool = toolName;
+
+  setDefaultToolBgColour();
+
+  if (selectedTool === "draw") {
+    BUT_DRAW.classList.add("active");
+  } else if (selectedTool === "erase") {
+    BUT_ERASE.classList.add("active");
+  }
+}
+setTool("draw");
 
 const SLIDER_CONTAINER = document.querySelector("#slider-container");
 const SLIDER = document.querySelector("#grid-size-slider");
