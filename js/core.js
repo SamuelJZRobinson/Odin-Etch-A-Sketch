@@ -91,6 +91,10 @@ function setGridSize(){
   createGrid();
 }
 
+SLIDER.oninput = function(){
+  SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${this.value} x ${this.value}`;
+}
+
 function setColour(colourName){
   selectedColour = colourName;
 }
