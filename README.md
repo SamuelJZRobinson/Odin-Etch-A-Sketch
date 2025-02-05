@@ -1,2 +1,2 @@
 # odin-etch-a-sketch
-BGRID_SIZEer version of sketchpad and Etch-A-Sketch.
+BgridSizeer version of sketchpad and Etch-A-Sketch.
