@@ -9,12 +9,18 @@ font-family: Arial, Helvetica, sans-serif;
 background-color: rgb(240, 235, 215);
 }
 
+/* Main */
+#main-container{
+  height: 100%;
+  /* Width handled by JS */
+  margin: 100px auto;
+}
+
 /* Canvas */
 #canvas{
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin: 100px auto;
-  background-color: black;
 }
 
 .cell{
@@ -24,8 +30,9 @@ background-color: rgb(240, 235, 215);
 
 /* Slider */
 #slider-container{
-  width: 600px;
+  width: 50%;
   margin: 0 auto;
+  padding: 16px 0px;
 }
 
 .slider{
@@ -35,5 +42,4 @@ background-color: rgb(240, 235, 215);
 #grid-size-value{
   width: 100%;
   text-align: center;
-  padding: 4px;
 }

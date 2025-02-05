@@ -1,10 +1,12 @@
 // Set Canvas
-const CANVAS_SIZE = 600;
+const CANVAS_SIZE = 500;
 const CELL_BORDER_SIZE = 1;
 let gridSize = 16;
 
+const MAIN_CONTAINER = document.querySelector("#main-container");
+
 const CANVAS = document.querySelector("#canvas");
-CANVAS.style.width = CANVAS.style.height = `${CANVAS_SIZE}px`;
+MAIN_CONTAINER.style.width = CANVAS.style.width = CANVAS.style.height = `${CANVAS_SIZE}px`;
 
 function changeBgColour(){
   this.style.backgroundColor = "black";
