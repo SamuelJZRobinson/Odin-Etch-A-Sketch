@@ -1,9 +1,11 @@
+// Tutorials Used:
+// Marvin Botchway.(16 October 2023).Etch a sketch JavaScript (Part 4).YouTube.https://www.youtube.com/watch?v=18gRh7-qg3w
+
 // DOM
 const MAIN_CONTAINER = document.querySelector("#container");
 
 const BUT_CLEAR_CANVAS = document.querySelector("button#clear-canvas");
-const BUT_DRAW = document.querySelector("button#draw");
-const BUT_ERASE = document.querySelector("button#erase");
+const BUT_TOOLS = document.querySelectorAll("button.tools");
 const BUT_COLOURS = document.querySelectorAll("button.colours");
 const SLIDER = document.querySelector("#grid-size-slider");
 const SLIDER_VALUE = document.querySelector("#grid-size-value");
@@ -15,6 +17,21 @@ BUT_CLEAR_CANVAS.addEventListener("click",(e) =>{
   createCanvas();
 })
 
+BUT_TOOLS.forEach(button => {
+  button.addEventListener("click",(e) =>{
+    const TOOL = button.dataset.tool ;
+    setTool(TOOL);
+    updateToolUI(e);
+  })
+})
+
+BUT_COLOURS.forEach(button => {
+  button.addEventListener("click",(e) =>{
+    const COLOUR = button.dataset.colour;
+    setColour(COLOUR);
+  });
+})
+
 SLIDER.addEventListener("change", (e) => setGridSize());
 SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
 
@@ -22,24 +39,17 @@ SLIDER.oninput = (e) => {
   updateGridSizeUI(e);
 }
 
-BUT_COLOURS.forEach(button => {
-  button.addEventListener("click",(e) =>{
-    let colour = button.dataset.colour;
-    setColour(colour);
-  });
-})
-
 // Global Variables
 const CANVAS_SIZE = CANVAS.offsetWidth;
 let gridSize = 16;
 const CELL_BORDER_SIZE = 1;
 let isDrawing = false;
-let selectedTool = null;
-let selectedColour = null;
+let selectedTool = "draw";
+let selectedColour = "black";
 
 // Core Logic
-// Set Default
 createCanvas();
+BUT_TOOLS[0].classList.add("active");
 
 /**
  * Clears all cells in the canvas.
@@ -97,35 +107,27 @@ function setBgColour(e){
   }
 }
 
-// // Settings
+/**
+ * Sets the active tool that interacts with the canvas.
+ * 
+ * @param {*} tool - The name of the tool being selected that is given an active class.
+ */
+function setTool(tool){
+  selectedTool = tool;
+  console.log("Set tool:",tool);
+}
 
-// /**
-//  * Sets all tool buttons to a default state to prepare for another selection.
-//  * Purely cosmetic and ensures only the selected tool is highlighted.
-//  */
-// function deactivateTools(){
-//   BUT_DRAW.classList.remove("active");
-//   BUT_ERASE.classList.remove("active");
-// }
+/**
+ * Sets all tool buttons to a default state to prepare for another selection.
+ * Purely cosmetic and ensures only the selected tool is highlighted.
+ */
+function updateToolUI(e) {
+  BUT_TOOLS.forEach(button =>{
+    button.classList.remove("active");
+  })
 
-// /**
-//  * Sets the active tool that interacts with the canvas.
-//  * 
-//  * @param {*} toolName - The name of the tool being selected that is given an active class.
-//  */
-// function setTool(toolName){
-//   selectedTool = toolName;
-
-//   deactivateTools();
-
-//   if (selectedTool === "draw") {
-//     BUT_DRAW.classList.add("active");
-//   } else if (selectedTool === "erase") {
-//     BUT_ERASE.classList.add("active");
-//   }
-// }
-// // Default tool
-// setTool("draw");
+  e.currentTarget.classList.add("active");
+}
 
 /**
  * Set the quantity of grid cells generated after a change is made to the slider.
@@ -153,5 +155,3 @@ function setColour(colour) {
   selectedColour = colour;
   console.log("Set colour:",colour);
 }
-// Default colour
-setColour("black")
