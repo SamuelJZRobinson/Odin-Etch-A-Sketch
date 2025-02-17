@@ -50,7 +50,7 @@ let gridSize = 16;
 const CELL_BORDER_SIZE = 1;
 let isDrawing = false;
 let selectedTool = "draw";
-let selectedColour = "black";
+let selectedColour = getComputedStyle(BUT_COLOURS[0]).backgroundColor;
 
 // Core Logic
 // Set default values
@@ -96,8 +96,22 @@ function createCanvas() {
  * @param {*} e mouse event grid cell
  */
 function setBgColour(e) {
-  // Preserve the selected colour when using the eraser.
-  let colorToApply = (selectedTool === "draw") ? selectedColour : "white";
+  let colorToApply;
+  switch(selectedTool){
+    case "draw":
+      colorToApply = selectedColour;
+      break;
+    case "rainbow":
+      const RANDOM_BUTTON = BUT_COLOURS[Math.floor(Math.random() * BUT_COLOURS.length)];
+      colorToApply = getComputedStyle(RANDOM_BUTTON).backgroundColor;
+      console.log(colorToApply);
+      break;
+    case "erase":
+      colorToApply = "white";
+      break;
+    default:
+      // Do nothing
+  }
 
   if (e.type === "mousedown") {
     isDrawing = true;
@@ -107,6 +121,22 @@ function setBgColour(e) {
   if (e.type === "mouseover" && isDrawing) {
     e.target.style.backgroundColor = colorToApply;
   }
+}
+
+/**
+ * Set the quantity of grid cells generated based on the slider value and updates the canvas.
+*/
+function setGridSize() {
+  gridSize = SLIDER.value
+  createCanvas();
+}
+
+/**
+ * Dynamically changes the slider grid size value independent of canvas updates.
+*/
+function updateGridSizeUI(e) {
+  const GRID_SIZE_VALUE = e.target.value;
+  SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${GRID_SIZE_VALUE} x ${GRID_SIZE_VALUE}`;
 }
 
 /**
@@ -128,22 +158,6 @@ function updateToolUI(e) {
   })
 
   e.currentTarget.classList.add("active");
-}
-
-/**
- * Set the quantity of grid cells generated based on the slider value and updates the canvas.
- */
-function setGridSize() {
-  gridSize = SLIDER.value
-  createCanvas();
-}
-
-/**
- * Dynamically changes the slider grid size value independent of canvas updates.
- */
-function updateGridSizeUI(e) {
-  const GRID_SIZE_VALUE = e.target.value;
-  SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${GRID_SIZE_VALUE} x ${GRID_SIZE_VALUE}`;
 }
 
 /**
