@@ -13,10 +13,12 @@ const SLIDER_VALUE = document.querySelector("#grid-size-value");
 const CANVAS = document.querySelector("#canvas");
 
 // Events
+// Clear canvas
 BUT_CLEAR_CANVAS.addEventListener("click",(e) =>{
   createCanvas();
 })
 
+// Select tool
 BUT_TOOLS.forEach(button => {
   button.addEventListener("click",(e) =>{
     const TOOL = button.dataset.tool ;
@@ -25,6 +27,7 @@ BUT_TOOLS.forEach(button => {
   })
 })
 
+// Select colour
 BUT_COLOURS.forEach(button => {
   button.addEventListener("click",(e) =>{
     const COLOUR = button.dataset.colour;
@@ -32,9 +35,11 @@ BUT_COLOURS.forEach(button => {
   });
 })
 
+// Select grid size
 SLIDER.addEventListener("change", (e) => setGridSize());
 SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
 
+// Update grid size text
 SLIDER.oninput = (e) => {
   updateGridSizeUI(e);
 }
@@ -48,40 +53,38 @@ let selectedTool = "draw";
 let selectedColour = "black";
 
 // Core Logic
+// Set default values
 createCanvas();
 BUT_TOOLS[0].classList.add("active");
 
 /**
- * Clears all cells in the canvas.
+ * Clears all canvas cells by deleting them
  */
-function clearCanvas(){
+function clearCanvas() {
   while (CANVAS.firstChild) {
     CANVAS.removeChild(CANVAS.firstChild);
   }
+
   console.log("Cleared canvas");
 }
 
 /**
- * Generates a grid of cells in the canvas.
+ * Generates cells and inserts them into the canvas.
  * Each cell listens to mouse events and sets the background colour.
  */
 function createCanvas() {
   clearCanvas();
-
   const TOTAL_CELLS = gridSize * gridSize;
-
   CANVAS.style.gridTemplateColumns = CANVAS.style.gridTemplateRows = `repeat(${gridSize},1fr)`;
 
-  for(let i = 0; i < (TOTAL_CELLS); i++){
+  for(let i = 0; i < TOTAL_CELLS; i++) {
     const GRID_CELL = document.createElement("div");
-
     GRID_CELL.classList.add("cell");
-    CANVAS.appendChild(GRID_CELL);
-
     GRID_CELL.addEventListener("mousedown", (e)=> setBgColour(e));
     GRID_CELL.addEventListener("mouseover", (e)=> setBgColour(e));
     GRID_CELL.addEventListener("mouseup", (e)=> isDrawing = false);
     GRID_CELL.addEventListener("dragstart", (e) => (e.preventDefault()));
+    CANVAS.appendChild(GRID_CELL);
   }
 
   console.log("Created canvas");
@@ -89,20 +92,19 @@ function createCanvas() {
 
 /**
  * Sets the background colours of cells based on the selected tool and selected colour.
- * A temporary colour variable is set to preserve the selected colour when using the eraser.
  * 
- * @param {*} e - Triggered mouse event.
+ * @param {*} e mouse event grid cell
  */
-function setBgColour(e){
+function setBgColour(e) {
+  // Preserve the selected colour when using the eraser.
   let colorToApply = (selectedTool === "draw") ? selectedColour : "white";
 
-  // Mouse Event
-  if (e.type === "mousedown"){
+  if (e.type === "mousedown") {
     isDrawing = true;
     e.target.style.backgroundColor = colorToApply;
   }
 
-  if (e.type === "mouseover" && isDrawing){
+  if (e.type === "mouseover" && isDrawing) {
     e.target.style.backgroundColor = colorToApply;
   }
 }
@@ -110,7 +112,7 @@ function setBgColour(e){
 /**
  * Sets the active tool that interacts with the canvas.
  * 
- * @param {*} tool - The name of the tool being selected that is given an active class.
+ * @param {*} tool string tool name
  */
 function setTool(tool){
   selectedTool = tool;
@@ -118,8 +120,7 @@ function setTool(tool){
 }
 
 /**
- * Sets all tool buttons to a default state to prepare for another selection.
- * Purely cosmetic and ensures only the selected tool is highlighted.
+ * Updates the selected tool button with the active class to highlight it.
  */
 function updateToolUI(e) {
   BUT_TOOLS.forEach(button =>{
@@ -130,7 +131,7 @@ function updateToolUI(e) {
 }
 
 /**
- * Set the quantity of grid cells generated after a change is made to the slider.
+ * Set the quantity of grid cells generated based on the slider value and updates the canvas.
  */
 function setGridSize() {
   gridSize = SLIDER.value
@@ -138,7 +139,7 @@ function setGridSize() {
 }
 
 /**
- * Dynamically change slider grid size values independent of grid updates.
+ * Dynamically changes the slider grid size value independent of canvas updates.
  */
 function updateGridSizeUI(e) {
   const GRID_SIZE_VALUE = e.target.value;
@@ -147,9 +148,8 @@ function updateGridSizeUI(e) {
 
 /**
  * Set the active colour applied to the canvas.
- * Doesn't apply to the eraser tool.
  * 
- * @param {*} colour - The colour being selected that is applied to the canvas using the drawing tool.
+ * @param {*} colour string colour name
  */
 function setColour(colour) {
   selectedColour = colour;
