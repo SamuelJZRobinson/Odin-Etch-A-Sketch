@@ -2,6 +2,7 @@
 /* Global */
 :root {
   --primary-bg: #24a0ed;
+  --primary-text: rgba(0,0,0,85%);
   --page-bg: #f0ebd7;
 }
 
@@ -49,6 +50,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Main */
+#title{
+  position: absolute;
+  top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-text);
+}
+
 main {
   display: inline-flex;
   align-items: center;
@@ -104,6 +113,7 @@ button.icon {
   justify-content: center;
   height: 2rem;
   width: 2rem;
+  color: var(--primary-text);
   border: 2px var(--primary-bg) solid;
   border-radius: 8px;
 }
@@ -114,10 +124,6 @@ button.icon.active {
 
 button.icon:hover {
   background-color: var(--primary-bg);
-}
-
-button.icon .material-symbols-outlined {
-  opacity: 80%;
 }
 
 /* Colours */
@@ -179,6 +185,7 @@ button.green {
 #grid-size-value {
   width: 100%;
   padding-left: 16px;
+  color: var(--primary-text);
 }
 
 /* Canvas */
@@ -199,4 +206,13 @@ button.green {
   height: 100%;
   background-color: white;
   border: 1px rgba(0,0,0,5%) solid;
+}
+
+/* Footer */
+#copyright{
+  position: absolute;
+  bottom: 1rem;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--primary-text);
 }
