@@ -145,35 +145,35 @@ button.circle:hover {
 }
 
 button.black {
-  background-color: black;
+  background-color: hsl(0, 0%, 35%);
 }
 
 button.gray { 
-  background-color: gray;
+  background-color: hsl(0, 0%, 55%);
 }
 
 button.red { 
-  background-color: red;
+  background-color: #c96851;
 }
 
 button.yellow { 
-  background-color: yellow;
+  background-color: #f0ce72;
 }
 
 button.blue { 
-  background-color: blue;
+  background-color: #4b7cbd;
 }
 
 button.purple { 
-  background-color: purple;
+  background-color: #858dd4;
 }
 
 button.orange {
-  background-color: orange;
+  background-color: #f09a72;
 }
 
 button.green { 
-  background-color: green;
+  background-color: #8fc095;
 }
 
 /* Slider */

@@ -30,7 +30,7 @@ BUT_TOOLS.forEach(button => {
 // Select colour
 BUT_COLOURS.forEach(button => {
   button.addEventListener("click",(e) =>{
-    const COLOUR = button.dataset.colour;
+    const COLOUR = getComputedStyle(button).backgroundColor;
     setColour(COLOUR);
   });
 })
