@@ -145,15 +145,15 @@ button.circle:hover {
 }
 
 button.black {
-  background-color: hsl(0, 0%, 35%);
+  background-color: #595959;
 }
 
 button.gray { 
-  background-color: hsl(0, 0%, 55%);
+  background-color: #8c8c8c;
 }
 
 button.red { 
-  background-color: #c96851;
+  background-color: #c9684f;
 }
 
 button.yellow { 
