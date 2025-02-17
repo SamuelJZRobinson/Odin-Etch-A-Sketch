@@ -71,6 +71,9 @@ main {
   margin-bottom: 1rem;
   background-color: white;
   border-radius: 0.5rem;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,15%);
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,15%);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,15%);
 }
 
 .controls-row {
@@ -186,6 +189,9 @@ button.green {
   width: 100%;
   height: auto;
   aspect-ratio: 1/1;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,15%);
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,15%);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,15%);
 }
 
 .cell {
