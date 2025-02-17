@@ -3,9 +3,11 @@
 - A browser drawing tool that lets users draw on a canvas constructed from many divs.
 - Features:
   - Clear
-  - Tools: draw, erase
+  - Draw
+  - Rainbow
+  - Erase
   - Colour selection
-  - Adjustable grid size
+  - Adjust grid size
 
 **Tech Used:**
 - HTML
