@@ -104,7 +104,6 @@ function setBgColour(e) {
     case "rainbow":
       const RANDOM_BUTTON = BUT_COLOURS[Math.floor(Math.random() * BUT_COLOURS.length)];
       colorToApply = getComputedStyle(RANDOM_BUTTON).backgroundColor;
-      console.log(colorToApply);
       break;
     case "erase":
       colorToApply = "white";
