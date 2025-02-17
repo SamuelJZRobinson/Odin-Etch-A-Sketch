@@ -21,38 +21,42 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
-  <div id="main-container">
-    <div class="flex-container">
-      <!-- Clear -->
-      <div class="settings-category">
-        <button type="tool" id="but-clear" class="but but-normal" onclick="clearGrid();createGrid()"><span class="material-symbols-outlined">delete</span>Clear</button>
+  <main>
+    <div id="main-container">
+      <div id="controls-container">
+        <div class="controls-row">
+        <!-- Clear -->
+        <button id="clear-canvas" class="icon" onclick="clearGrid();createGrid()"><span class="material-symbols-outlined">delete</span></button>
+        <!-- Tools -->
+         <div id="drawing-tools">
+           <button type="button" id="draw" class="tools icon" data-tool="draw"><span class="material-symbols-outlined">edit</span></button>
+           <button type="button" id="erase" class="tools icon" data-tool="erase"><span class="material-symbols-outlined">ink_eraser</span></button>
+         </div>
+         <!-- Colours -->
+         <div id="colours">
+           <button type="button" class="colours circle black" data-colour="black"></button>
+           <button type="button" class="colours circle gray" data-colour="gray"></button>
+           <button type="button" class="colours circle white" data-colour="white"></button>
+           <button type="button" class="colours circle red" data-colour="red"></button>
+           <button type="button" class="colours circle orange" data-colour="orange"></button>
+           <button type="button" class="colours circle yellow" data-colour="yellow"></button>
+           <button type="button" class="colours circle green" data-colour="green"></button>
+           <button type="button" class="colours circle blue" data-colour="blue"></button>
+          </div>
+        </div>
+        <!-- Grid Size -->
+        <div class="controls-row">
+          <input type="range" min="8" max="100" value="16" id="grid-size-slider" class="slider">
+          <p id="grid-size-value"></p>
+        </div>
       </div>
-      <!-- Tools -->
-      <div class="settings-category">
-        <button type="tool" id="but-draw" class="but but-normal" onclick="setTool('draw')"><span class="material-symbols-outlined">edit</span>Draw</button>
-        <button type="tool" id="but-erase" class="but but-normal" onclick="setTool('erase')"><span class="material-symbols-outlined">ink_eraser</span>Erase</button>
-      </div>
-      <!-- Colours -->
-      <div class="settings-category">
-        <button type="colour" id="but-black" class="but but-circle" onclick="setColour('black')"></button>
-        <button type="colour" id="but-gray" class="but but-circle" onclick="setColour('gray')"></button>
-        <button type="colour" id="but-white" class="but but-circle" onclick="setColour('white')"></button>
-        <button type="colour" id="but-red" class="but but-circle" onclick="setColour('red')"></button>
-        <button type="colour" id="but-orange" class="but but-circle" onclick="setColour('orange')"></button>
-        <button type="colour" id="but-yellow" class="but but-circle" onclick="setColour('yellow')"></button>
-        <button type="colour" id="but-green" class="but but-circle" onclick="setColour('green')"></button>
-        <button type="colour" id="but-blue" class="but but-circle" onclick="setColour('blue')"></button>
+      
+      <!-- Canvas -->
+      <div id="canvas">
+        <!-- Fill with cells -->
       </div>
     </div>
-    <!-- Grid Size -->
-    <div class="settings-category">
-      <input type="range" min="8" max="100" value="16" id="grid-size-slider" class="slider">
-      <p id="grid-size-value"></p>
-    </div>
-    
-    <!-- Canvas -->
-    <div id="canvas"></div>
-  </div>
+  </main>
 
   <!-- Always keep JS scripts at bottom of body -->
   <script src="js/core.js"></script>
