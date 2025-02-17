@@ -1,13 +1,26 @@
 // DOM
 const MAIN_CONTAINER = document.querySelector("#container");
 
-const BUT_CLEAR_CANVAS = document.querySelector("#but-clear-canvas");
-const BUT_DRAW = document.querySelector("#but-draw");
-const BUT_ERASE = document.querySelector("#but-erase");
+const BUT_CLEAR_CANVAS = document.querySelector("button#clear-canvas");
+const BUT_DRAW = document.querySelector("button#draw");
+const BUT_ERASE = document.querySelector("button#erase");
 const BUT_COLOURS = document.querySelectorAll("button.colours");
-
+const SLIDER = document.querySelector("#grid-size-slider");
+const SLIDER_VALUE = document.querySelector("#grid-size-value");
 
 const CANVAS = document.querySelector("#canvas");
+
+// Events
+BUT_CLEAR_CANVAS.addEventListener("click",(e) =>{
+  createCanvas();
+})
+
+SLIDER.addEventListener("change", (e) => setGridSize());
+SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
+
+SLIDER.oninput = (e) => {
+  updateGridSizeUI(e);
+}
 
 BUT_COLOURS.forEach(button => {
   button.addEventListener("click",(e) =>{
@@ -26,13 +39,25 @@ let selectedColour = null;
 
 // Core Logic
 // Set Default
-createGrid();
+createCanvas();
+
+/**
+ * Clears all cells in the canvas.
+ */
+function clearCanvas(){
+  while (CANVAS.firstChild) {
+    CANVAS.removeChild(CANVAS.firstChild);
+  }
+  console.log("Cleared canvas");
+}
 
 /**
  * Generates a grid of cells in the canvas.
  * Each cell listens to mouse events and sets the background colour.
  */
-function createGrid() {
+function createCanvas() {
+  clearCanvas();
+
   const TOTAL_CELLS = gridSize * gridSize;
 
   CANVAS.style.gridTemplateColumns = CANVAS.style.gridTemplateRows = `repeat(${gridSize},1fr)`;
@@ -49,40 +74,28 @@ function createGrid() {
     GRID_CELL.addEventListener("dragstart", (e) => (e.preventDefault()));
   }
 
-  console.log("Created grid");
+  console.log("Created canvas");
 }
 
+/**
+ * Sets the background colours of cells based on the selected tool and selected colour.
+ * A temporary colour variable is set to preserve the selected colour when using the eraser.
+ * 
+ * @param {*} e - Triggered mouse event.
+ */
+function setBgColour(e){
+  let colorToApply = (selectedTool === "draw") ? selectedColour : "white";
 
-// /**
-//  * Deletes all cells in the canvas.
-//  */
-// function clearGrid(){
-//   while (CANVAS.firstChild) {
-//     CANVAS.removeChild(CANVAS.firstChild);
-//   }
-  
-//   console.log("Cleared grid");
-// }
+  // Mouse Event
+  if (e.type === "mousedown"){
+    isDrawing = true;
+    e.target.style.backgroundColor = colorToApply;
+  }
 
-// /**
-//  * Sets the background colours of cells based on the selected tool and selected colour.
-//  * A temporary colour variable is set to preserve the selected colour when using the eraser.
-//  * 
-//  * @param {*} e - Triggered mouse event.
-//  */
-// function setBgColour(e){
-//   let colorToApply = (selectedTool === "draw") ? selectedColour : "white";
-
-//   // Mouse Event
-//   if (e.type === "mousedown"){
-//     isDrawing = true;
-//     e.target.style.backgroundColor = colorToApply;
-//   }
-
-//   if (e.type === "mouseover" && isDrawing){
-//     e.target.style.backgroundColor = colorToApply;
-//   }
-// }
+  if (e.type === "mouseover" && isDrawing){
+    e.target.style.backgroundColor = colorToApply;
+  }
+}
 
 // // Settings
 
@@ -114,28 +127,21 @@ function createGrid() {
 // // Default tool
 // setTool("draw");
 
-// const SLIDER_CONTAINER = document.querySelector("#slider-container");
-// const SLIDER = document.querySelector("#grid-size-slider");
-// const SLIDER_VALUE = document.querySelector("#grid-size-value");
-// SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
-// SLIDER.addEventListener("change", (e) => setGridSize());
+/**
+ * Set the quantity of grid cells generated after a change is made to the slider.
+ */
+function setGridSize() {
+  gridSize = SLIDER.value
+  createCanvas();
+}
 
-// /**
-//  * Set the quantity of grid cells generated after a change is made to the slider.
-//  */
-// function setGridSize(){
-//   SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${SLIDER.value} x ${SLIDER.value}`;
-//   gridSize = SLIDER.value
-//   clearGrid();
-//   createGrid();
-// }
-
-// /**
-//  * Dynamically change slider grid size values independent of grid updates.
-//  */
-// SLIDER.oninput = function(){
-//   SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${this.value} x ${this.value}`;
-// }
+/**
+ * Dynamically change slider grid size values independent of grid updates.
+ */
+function updateGridSizeUI(e) {
+  const GRID_SIZE_VALUE = e.target.value;
+  SLIDER.innerHTML = SLIDER_VALUE.textContent = `Size: ${GRID_SIZE_VALUE} x ${GRID_SIZE_VALUE}`;
+}
 
 /**
  * Set the active colour applied to the canvas.
@@ -143,7 +149,7 @@ function createGrid() {
  * 
  * @param {*} colour - The colour being selected that is applied to the canvas using the drawing tool.
  */
-function setColour(colour){
+function setColour(colour) {
   selectedColour = colour;
   console.log("Set colour:",colour);
 }
